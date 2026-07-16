@@ -19,8 +19,14 @@ CARTOPY_DATA_DIR = PROJECT_ROOT / ".cartopy"
 CARTOPY_DATA_DIR.mkdir(parents=True, exist_ok=True)
 cartopy.config["data_dir"] = CARTOPY_DATA_DIR
 
-from .core.analysis import AnalysisGrid, GridConfig, build_analysis_grid, summarize_bulletins
-from .core.parser import Bulletin, parse_wintem
+from .core.analysis import (
+    AnalysisGrid,
+    GridConfig,
+    build_analysis_grid,
+    point_diagnostic,
+    summarize_bulletins,
+)
+from .core.parser import Bulletin, format_latitude, format_longitude, parse_wintem
 from .export import export_csv, finite_text
 from .plotting import create_figure
 
@@ -123,13 +129,55 @@ def _figure_card(filename: str, title: str, description: str) -> str:
     )
 
 
+def _bulletin_detail(bulletin: Bulletin, grid: AnalysisGrid, filename: str) -> str:
+    """Crea la tabla completa de un boletín seguida por su malla gráfica."""
+    rows: list[str] = []
+    for point in bulletin.points:
+        d2x, d2y, laplacian, coriolis, eta = point_diagnostic(point, grid)
+        rows.append(
+            "<tr>"
+            f"<td>{escape(format_latitude(point.latitude))}</td>"
+            f"<td>{escape(format_longitude(point.longitude))}</td>"
+            f"<td>{point.direction_deg:03d}°</td>"
+            f"<td>{point.speed_kt}</td>"
+            f"<td>{point.speed_m_s:.1f}</td>"
+            f"<td>{point.temperature_c}</td>"
+            f"<td>{finite_text(d2x, 1e11)}</td>"
+            f"<td>{finite_text(d2y, 1e11)}</td>"
+            f"<td>{finite_text(laplacian, 1e11)}</td>"
+            f"<td>{finite_text(coriolis, 1e5)}</td>"
+            f"<td>{finite_text(eta, 1e6)}</td>"
+            "</tr>"
+        )
+    image_path = f"assets/figures/{filename}"
+    title = escape(bulletin.name)
+    return (
+        f"<article class='bulletin-detail' id='boletin-{bulletin.name.lower()}'>"
+        f"<div class='bulletin-heading'><h3>{title}</h3>"
+        f"<span>{len(bulletin.points)} observaciones F300</span></div>"
+        "<h4>Datos y diagnósticos completos</h4>"
+        "<div class='table-wrap bulletin-table'><table>"
+        "<thead><tr><th>Latitud</th><th>Longitud</th><th>Dirección</th>"
+        "<th>KT</th><th>m/s</th><th>T (°C)</th><th>d²T/dx² ×10¹¹</th>"
+        "<th>d²T/dy² ×10¹¹</th><th>∇²T ×10¹¹</th><th>f ×10⁵</th>"
+        "<th>η<sub>T</sub> ×10⁶</th></tr></thead>"
+        f"<tbody>{''.join(rows)}</tbody></table></div>"
+        "<h4>Malla del boletín</h4>"
+        "<div class='bulletin-grid'>"
+        f"<button class='image-button' type='button' data-lightbox-src='{image_path}' "
+        f"data-lightbox-alt='{title} — F300' aria-label='Ampliar malla {title}'>"
+        f"<img loading='lazy' src='{image_path}' alt='Malla {title} — F300'>"
+        "</button></div></article>"
+    )
+
+
 def _build_html(
     source_path: Path,
     bulletins: dict[str, Bulletin],
     grid: AnalysisGrid,
     warnings: tuple[str, ...],
     regional_cards: str,
-    bulletin_cards: str,
+    bulletin_details: str,
 ) -> str:
     observation_count = sum(len(bulletin.points) for bulletin in bulletins.values())
     observed_cells = int(np.isfinite(grid.temperature).sum())
@@ -161,7 +209,7 @@ def _build_html(
 
   <nav class="section-nav" aria-label="Secciones"><div class="wrap">
     <a href="#resumen">Resumen</a><a href="#productos">Mapas</a>
-    <a href="#boletines">Boletines</a><a href="#estadisticas">Estadísticas</a>
+    <a href="#estadisticas">Estadísticas</a><a href="#boletines">Boletines</a>
     <a href="#metodo">Método</a>
   </div></nav>
 
@@ -189,12 +237,6 @@ def _build_html(
       <div class="figure-grid">{regional_cards}</div>
     </section>
 
-    <section id="boletines">
-      <h2>Mallas por boletín</h2>
-      <p>Dirección del viento, velocidad en nudos y temperatura en bloques separados por boletín.</p>
-      <div class="figure-grid">{bulletin_cards}</div>
-    </section>
-
     <section id="estadisticas">
       <h2>Resumen estadístico por boletín</h2>
       <div class="table-wrap"><table>
@@ -202,6 +244,12 @@ def _build_html(
         <thead><tr><th>Boletín</th><th>Puntos</th><th>Válidos</th><th>Media</th><th>Desv. estándar</th><th>Mínimo</th><th>Máximo</th></tr></thead>
         <tbody>{_summary_table(bulletins, grid)}</tbody>
       </table></div>
+    </section>
+
+    <section id="boletines">
+      <h2>Datos, diagnósticos y mallas por boletín</h2>
+      <p>Cada boletín se presenta por separado: primero sus datos y diagnósticos completos y, justo debajo, su malla de dirección, velocidad y temperatura.</p>
+      <div class="bulletin-list">{bulletin_details}</div>
     </section>
 
     <section id="metodo">
@@ -266,7 +314,7 @@ def build_static_site(
         _save_figure(figures_dir / filename, view_key, grid, parse_result.bulletins)
         regional_cards.append(_figure_card(filename, title, description))
 
-    bulletin_cards: list[str] = []
+    bulletin_details: list[str] = []
     for index, bulletin in enumerate(parse_result.bulletins.values(), start=1):
         filename = f"boletin_{index:02d}_{bulletin.name.lower()}.png"
         _save_figure(
@@ -276,13 +324,7 @@ def build_static_site(
             parse_result.bulletins,
             bulletin,
         )
-        bulletin_cards.append(
-            _figure_card(
-                filename,
-                bulletin.name,
-                f"{len(bulletin.points)} observaciones decodificadas en F300.",
-            )
-        )
+        bulletin_details.append(_bulletin_detail(bulletin, grid, filename))
 
     index_path = output_dir / "index.html"
     index_path.write_text(
@@ -292,7 +334,7 @@ def build_static_site(
             grid,
             parse_result.warnings,
             "".join(regional_cards),
-            "".join(bulletin_cards),
+            "".join(bulletin_details),
         ),
         encoding="utf-8",
     )
