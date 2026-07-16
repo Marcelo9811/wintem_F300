@@ -79,7 +79,11 @@
       g = 9.8 m s⁻², Ω = 7.2e-05 rad s⁻¹,
       1 KT = 0.5 m s⁻¹ y 1° = 110 km. Las derivadas segundas
       se calculan mediante diferencias centradas sobre la malla regular.</p>
-      <p><a href="methodology.html">Metodología ampliada</a></p>
+      <h2>Campos</h2>
+      <p>La temperatura decodificada se organiza como T(latitud, longitud). Las derivadas se calculan con diferencias finitas centradas de segundo orden en puntos que tienen vecinos completos.</p>
+      <div class="formula">∂²T/∂x² ≈ [T(i,j+1) − 2T(i,j) + T(i,j−1)] / Δx²</div>
+      <div class="formula">f = 2 Ω sin(φ) &nbsp;&nbsp; y &nbsp;&nbsp; η<sub>T</sub> = (g/f) ∇²T</div>
+      <h2>Constantes</h2><ul><li>g = 9.8 m s⁻²</li><li>Ω = 7.2 × 10⁻⁵ rad s⁻¹</li><li>1 KT = 0.5 m s⁻¹</li><li>1 grado = 110 km en el modo original</li></ul>
     </section>
   </main>
   <footer><div class="wrap">WINTEM F300 · Producto científico para análisis académico. </div></footer>
