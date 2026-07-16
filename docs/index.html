@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Informe estático WINTEM F300 y vorticidad térmica.">
+  <meta name="description" content="Informe WINTEM F300 y vorticidad térmica.">
   <title>Informe WINTEM F300</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <header class="hero"><div class="wrap">
-    <p class="eyebrow">INFORME METEOROLÓGICO ESTÁTICO</p>
+    <p class="eyebrow">INFORME METEOROLÓGICO</p>
     <h1>WINTEM · Nivel F300</h1>
     <p class="lead">Viento, temperatura y diagnóstico de vorticidad térmica calculados localmente.</p>
     <p class="meta">Fuente: <strong>WINTEM_2026-1_FL300_G6.txt</strong></p>
@@ -26,23 +26,26 @@
       <h2>Resumen de control de calidad</h2>
       <div class="metrics">
         <article><strong>8</strong><span>boletines</span></article>
-        <article><strong>181</strong><span>observaciones</span></article>
+        <article><strong>181</strong><span>puntos</span></article>
         <article><strong>15 × 20</strong><span>malla</span></article>
-        <article><strong>181</strong><span>celdas observadas</span></article>
-        <article><strong>119</strong><span>celdas sin dato</span></article>
         <article><strong>92</strong><span>valores válidos de η<sub>T</sub></span></article>
       </div>
-      <p class="note">Una celda sin dato es una posición de la malla combinada para la que ningún boletín
-      aporta temperatura. No representa necesariamente una falla instrumental. Los bordes, los huecos sin
-      vecinos completos y la banda |φ| ≤ 5° se mantienen como NaN.</p>
+      <p class="note">Los bordes sin vecinos completos se mantienen como NaN.</p>
     </section>
 
     
 
     <section id="productos">
-      <h2>Productos regionales</h2>
-      <p>Seleccione cualquier figura para verla a resolución completa.</p>
-      <div class="figure-grid"><article class='figure-card'><button class='image-button' type='button' data-lightbox-src='assets/figures/00_resumen.png' data-lightbox-alt='Resumen' aria-label='Ampliar Resumen'><img loading='lazy' src='assets/figures/00_resumen.png' alt='Resumen'></button><div><h3>Resumen</h3><p>Indicadores de cobertura y control de calidad.</p></div></article><article class='figure-card'><button class='image-button' type='button' data-lightbox-src='assets/figures/01_viento.png' data-lightbox-alt='Viento y velocidad' aria-label='Ampliar Viento y velocidad'><img loading='lazy' src='assets/figures/01_viento.png' alt='Viento y velocidad'></button><div><h3>Viento y velocidad</h3><p>Vectores de viento sobre el campo de velocidad.</p></div></article><article class='figure-card'><button class='image-button' type='button' data-lightbox-src='assets/figures/02_temperatura.png' data-lightbox-alt='Temperatura F300' aria-label='Ampliar Temperatura F300'><img loading='lazy' src='assets/figures/02_temperatura.png' alt='Temperatura F300'></button><div><h3>Temperatura F300</h3><p>Distribución espacial de la temperatura observada.</p></div></article><article class='figure-card'><button class='image-button' type='button' data-lightbox-src='assets/figures/03_derivada_zonal.png' data-lightbox-alt='Curvatura zonal' aria-label='Ampliar Curvatura zonal'><img loading='lazy' src='assets/figures/03_derivada_zonal.png' alt='Curvatura zonal'></button><div><h3>Curvatura zonal</h3><p>Segunda derivada de T respecto de x.</p></div></article><article class='figure-card'><button class='image-button' type='button' data-lightbox-src='assets/figures/04_derivada_meridional.png' data-lightbox-alt='Curvatura meridional' aria-label='Ampliar Curvatura meridional'><img loading='lazy' src='assets/figures/04_derivada_meridional.png' alt='Curvatura meridional'></button><div><h3>Curvatura meridional</h3><p>Segunda derivada de T respecto de y.</p></div></article><article class='figure-card'><button class='image-button' type='button' data-lightbox-src='assets/figures/05_laplaciano.png' data-lightbox-alt='Laplaciano térmico' aria-label='Ampliar Laplaciano térmico'><img loading='lazy' src='assets/figures/05_laplaciano.png' alt='Laplaciano térmico'></button><div><h3>Laplaciano térmico</h3><p>Suma de las curvaturas zonal y meridional.</p></div></article><article class='figure-card'><button class='image-button' type='button' data-lightbox-src='assets/figures/06_coriolis.png' data-lightbox-alt='Parámetro de Coriolis' aria-label='Ampliar Parámetro de Coriolis'><img loading='lazy' src='assets/figures/06_coriolis.png' alt='Parámetro de Coriolis'></button><div><h3>Parámetro de Coriolis</h3><p>Variación de f con la latitud; escala 10⁻⁵ s⁻¹.</p></div></article><article class='figure-card'><button class='image-button' type='button' data-lightbox-src='assets/figures/07_vorticidad_termica.png' data-lightbox-alt='Vorticidad térmica' aria-label='Ampliar Vorticidad térmica'><img loading='lazy' src='assets/figures/07_vorticidad_termica.png' alt='Vorticidad térmica'></button><div><h3>Vorticidad térmica</h3><p>Diagnóstico η_T con la banda ecuatorial enmascarada.</p></div></article></div>
+      <h2>Gráficas regionales</h2>
+      <div class="figure-grid">
+        <article class='figure-card'>
+            <button class='image-button' type='button' data-lightbox-src='assets/figures/01_viento.png' data-lightbox-alt='Viento y velocidad' aria-label='Ampliar Viento y velocidad'>
+              <img loading='lazy' src='assets/figures/01_viento.png' alt='Viento y velocidad'>
+            </button>
+            <div>
+              <h3>Viento y velocidad</h3>
+              <p>Vectores de viento sobre el campo de velocidad.</p>
+            </div></article><article class='figure-card'><button class='image-button' type='button' data-lightbox-src='assets/figures/02_temperatura.png' data-lightbox-alt='Temperatura F300' aria-label='Ampliar Temperatura F300'><img loading='lazy' src='assets/figures/02_temperatura.png' alt='Temperatura F300'></button><div><h3>Temperatura F300</h3><p>Distribución espacial de la temperatura observada.</p></div></article><article class='figure-card'><button class='image-button' type='button' data-lightbox-src='assets/figures/03_derivada_zonal.png' data-lightbox-alt='Curvatura zonal' aria-label='Ampliar Curvatura zonal'><img loading='lazy' src='assets/figures/03_derivada_zonal.png' alt='Curvatura zonal'></button><div><h3>Curvatura zonal</h3><p>Segunda derivada de T respecto de x.</p></div></article><article class='figure-card'><button class='image-button' type='button' data-lightbox-src='assets/figures/04_derivada_meridional.png' data-lightbox-alt='Curvatura meridional' aria-label='Ampliar Curvatura meridional'><img loading='lazy' src='assets/figures/04_derivada_meridional.png' alt='Curvatura meridional'></button><div><h3>Curvatura meridional</h3><p>Segunda derivada de T respecto de y.</p></div></article><article class='figure-card'><button class='image-button' type='button' data-lightbox-src='assets/figures/05_laplaciano.png' data-lightbox-alt='Laplaciano térmico' aria-label='Ampliar Laplaciano térmico'><img loading='lazy' src='assets/figures/05_laplaciano.png' alt='Laplaciano térmico'></button><div><h3>Laplaciano térmico</h3><p>Suma de las curvaturas zonal y meridional.</p></div></article><article class='figure-card'><button class='image-button' type='button' data-lightbox-src='assets/figures/06_coriolis.png' data-lightbox-alt='Parámetro de Coriolis' aria-label='Ampliar Parámetro de Coriolis'><img loading='lazy' src='assets/figures/06_coriolis.png' alt='Parámetro de Coriolis'></button><div><h3>Parámetro de Coriolis</h3><p>Variación de f con la latitud; escala 10⁻⁵ s⁻¹.</p></div></article><article class='figure-card'><button class='image-button' type='button' data-lightbox-src='assets/figures/07_vorticidad_termica.png' data-lightbox-alt='Vorticidad térmica' aria-label='Ampliar Vorticidad térmica'><img loading='lazy' src='assets/figures/07_vorticidad_termica.png' alt='Vorticidad térmica'></button><div><h3>Vorticidad térmica</h3><p>Diagnóstico η_T con la banda ecuatorial enmascarada.</p></div></article></div>
     </section>
 
     <section id="estadisticas">
@@ -74,13 +77,14 @@
       g = 9.8 m s⁻², Ω = 7.2e-05 rad s⁻¹,
       1 KT = 0.5 m s⁻¹ y 1° = 110 km. Las derivadas segundas
       se calculan mediante diferencias centradas sobre la malla regular.</p>
-      <p>Este sitio es una instantánea de resultados: no recalcula datos en el navegador y no contiene
-      Tkinter, un servidor web ni un proceso Python remoto. Para actualizarlo se vuelve a ejecutar el
-      generador local con el nuevo WINTEM y se publican los archivos modificados de <code>docs/</code>.</p>
-      <p><a href="methodology.html">Metodología ampliada</a> · <a href="publishing.html">Guía de publicación</a></p>
+      <h2>Campos</h2>
+      <p>La temperatura decodificada se organiza como T(latitud, longitud). Las derivadas se calculan con diferencias finitas centradas de segundo orden en puntos que tienen vecinos completos.</p>
+      <div class="formula">∂²T/∂x² ≈ [T(i,j+1) − 2T(i,j) + T(i,j−1)] / Δx²</div>
+      <div class="formula">f = 2 Ω sin(φ) &nbsp;&nbsp; y &nbsp;&nbsp; η<sub>T</sub> = (g/f) ∇²T</div>
+      <h2>Constantes</h2><ul><li>g = 9.8 m s⁻²</li><li>Ω = 7.2 × 10⁻⁵ rad s⁻¹</li><li>1 KT = 0.5 m s⁻¹</li><li>1 grado = 110 km en el modo original</li></ul>
     </section>
   </main>
-  <footer><div class="wrap">WINTEM F300 · Producto científico para análisis académico. Verifique los datos antes de decisiones operativas.</div></footer>
+  <footer><div class="wrap">WINTEM F300</div></footer>
   <div class="lightbox" id="image-lightbox" role="dialog" aria-modal="true" aria-label="Vista ampliada" hidden>
     <button class="lightbox-close" type="button" aria-label="Cerrar vista ampliada">×</button>
     <img src="" alt="">
