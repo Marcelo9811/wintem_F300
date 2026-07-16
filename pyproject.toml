@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wintem-f300-analysis"
+version = "1.0.0"
+description = "Análisis de boletines WINTEM y vorticidad térmica en F300"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+license = "MIT"
+authors = [{name = "WINTEM F300 Analysis contributors"}]
+dependencies = [
+    "numpy==2.2.6",
+    "matplotlib==3.10.7",
+    "Cartopy==0.25.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==8.4.2"]
+
+[project.gui-scripts]
+wintem-f300 = "wintem_f300.gui.app:main"
+
+[project.scripts]
+wintem-f300-site = "wintem_f300.static_site:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

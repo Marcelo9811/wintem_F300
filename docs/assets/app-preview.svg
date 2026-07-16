@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820" role="img" aria-labelledby="title desc">
+  <title id="title">Vista de la aplicación WINTEM F300</title>
+  <desc id="desc">Interfaz de escritorio con controles, mapa regional y escala de vorticidad térmica.</desc>
+  <defs>
+    <linearGradient id="map" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#173f75"/><stop offset=".48" stop-color="#f7f7f7"/><stop offset="1" stop-color="#a82038"/></linearGradient>
+  </defs>
+  <rect width="1400" height="820" rx="22" fill="#eef2f6"/>
+  <rect x="0" y="0" width="1400" height="58" rx="22" fill="#173f75"/>
+  <circle cx="30" cy="29" r="9" fill="#ff6b6b"/><circle cx="58" cy="29" r="9" fill="#ffd166"/><circle cx="86" cy="29" r="9" fill="#5dd39e"/>
+  <text x="125" y="37" fill="white" font-family="Segoe UI, sans-serif" font-size="21" font-weight="700">Análisis WINTEM F300</text>
+  <rect x="22" y="80" width="290" height="714" rx="14" fill="white" stroke="#c9d4df"/>
+  <text x="46" y="120" fill="#17233a" font-family="Segoe UI, sans-serif" font-size="19" font-weight="700">Controles</text>
+  <text x="46" y="160" fill="#526078" font-family="Segoe UI, sans-serif" font-size="14">Boletín</text>
+  <rect x="46" y="172" width="240" height="40" rx="7" fill="#f5f7fa" stroke="#bdc9d5"/><text x="60" y="198" font-family="Consolas, monospace" font-size="15">FBTEST</text>
+  <text x="46" y="252" fill="#526078" font-family="Segoe UI, sans-serif" font-size="14">Geometría de malla</text>
+  <circle cx="60" cy="282" r="8" fill="#155f91"/><text x="80" y="288" font-family="Segoe UI, sans-serif" font-size="15">Original: 110 km/°</text>
+  <circle cx="60" cy="316" r="8" fill="white" stroke="#7d8b99"/><text x="80" y="322" font-family="Segoe UI, sans-serif" font-size="15">Corregida: cos(latitud)</text>
+  <text x="46" y="370" fill="#526078" font-family="Segoe UI, sans-serif" font-size="14">Producto</text>
+  <rect x="42" y="383" width="248" height="48" rx="8" fill="#dceefa"/><text x="60" y="413" fill="#124e75" font-family="Segoe UI, sans-serif" font-size="16" font-weight="700">Vorticidad térmica η_T</text>
+  <text x="60" y="462" font-family="Segoe UI, sans-serif" font-size="15">Temperatura</text><text x="60" y="500" font-family="Segoe UI, sans-serif" font-size="15">Laplaciano</text><text x="60" y="538" font-family="Segoe UI, sans-serif" font-size="15">Coriolis</text>
+  <rect x="46" y="700" width="240" height="45" rx="8" fill="#155f91"/><text x="116" y="729" fill="white" font-family="Segoe UI, sans-serif" font-size="15" font-weight="700">Exportar CSV</text>
+  <rect x="334" y="80" width="1044" height="714" rx="14" fill="white" stroke="#c9d4df"/>
+  <text x="856" y="125" text-anchor="middle" fill="#17233a" font-family="Segoe UI, sans-serif" font-size="25" font-weight="700">Vorticidad térmica η_T — F300</text>
+  <rect x="390" y="162" width="930" height="530" rx="8" fill="#dceef8"/>
+  <path d="M460 610 C520 530 490 455 590 405 C680 360 700 260 780 215 C820 285 920 300 980 370 C1050 450 1140 500 1240 580 L1240 650 L460 650Z" fill="#eee8d9" stroke="#526078" stroke-width="3"/>
+  <g opacity=".82"><circle cx="600" cy="520" r="95" fill="#244c87"/><circle cx="745" cy="420" r="105" fill="#edf1f4"/><circle cx="900" cy="350" r="92" fill="#b22c43"/><circle cx="1030" cy="470" r="110" fill="#741f3a"/></g>
+  <g stroke="#17233a" stroke-width="4" fill="none"><path d="M550 500l45-20-18-10m18 10-9 19"/><path d="M715 430l48-35-20-5m20 5-7 20"/><path d="M890 365l44-24-18-8m18 8-8 18"/></g>
+  <rect x="470" y="720" width="760" height="20" rx="10" fill="url(#map)"/><text x="450" y="738" text-anchor="end" font-family="Segoe UI, sans-serif" font-size="13">−</text><text x="1250" y="738" font-family="Segoe UI, sans-serif" font-size="13">+</text>
+</svg>

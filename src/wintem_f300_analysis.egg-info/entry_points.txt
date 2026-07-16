@@ -1,0 +1,5 @@
+[console_scripts]
+wintem-f300-site = wintem_f300.static_site:main
+
+[gui_scripts]
+wintem-f300 = wintem_f300.gui.app:main
